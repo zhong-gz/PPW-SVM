@@ -1,0 +1,8 @@
+,d = 5,d = 7.5,d = 10
+PPW-AVG,0.665 $\pm$ 0.011,0.738 $\pm$ 0.009,0.779 $\pm$ 0.006
+PPW-EMA,0.663 $\pm$ 0.01,0.737 $\pm$ 0.009,0.777 $\pm$ 0.008
+RRM Logistic Regression,0.601 $\pm$ 0.012,0.672 $\pm$ 0.011,0.717 $\pm$ 0.009
+RGD Logistic Regression,0.603 $\pm$ 0.013,0.672 $\pm$ 0.01,0.717 $\pm$ 0.01
+RRM with Neural Networks,0.65 $\pm$ 0.014,0.744 $\pm$ 0.012,0.812 $\pm$ 0.013
+Two-Stage Approach,0.598 $\pm$ 0.011,0.662 $\pm$ 0.01,0.705 $\pm$ 0.009
+PerGD,0.601 $\pm$ 0.014,0.666 $\pm$ 0.01,0.712 $\pm$ 0.01
