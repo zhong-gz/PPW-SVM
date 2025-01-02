@@ -26,10 +26,12 @@ class DFO_GD:
         self.flag = False
         self.flag2 = True
     
-    def train(self, X, y):
+    def train(self, X, y_ture):
         X_b = np.c_[np.ones((X.shape[0], 1)), X]
         d = X_b.shape[1]
         n = X_b.shape[0]
+        Y = np.copy(y_ture)
+        Y[Y != 1] = 0
 
         if self.outer_iter == 0 and self.inner_iter == 0:
             # step size 相关的参数
@@ -37,7 +39,7 @@ class DFO_GD:
             self.beta = 1/6
             self.eta0 = d ** (-2/3) * 0.3 #0.3
             self.alpha = -2/3
-            self.theta, self.sample_z = self.initialization(X_b,y)
+            self.theta, self.sample_z = self.initialization(X_b,Y)
             self.pert_theta = np.copy(self.theta)
             self.coef_ = self.theta[1:].reshape(-1,1).T
         
@@ -54,14 +56,14 @@ class DFO_GD:
             # new_sample = self.problem.sample_from_stationary_dist(pert_theta)
             self.sample_count += 1
 
-            grd = d / self.delta_k * ((self.ell_loss(self.pert_theta, X_b,y)/n)/d) * (self.new_uk + np.random.normal(0, 0.05, d))
+            grd = d / self.delta_k * ((self.ell_loss(self.pert_theta, X_b,Y))) * (self.new_uk ) #+ np.random.normal(0, 0.00001, d)
             # grd = self.problem.dim / delta_k * self.problem.expect_loss(pert_theta) * uk  #如果用真正的grd是可以收敛的
 
             # update theta
-            rate = 0.01
-            lr = (self.forgetting_factor ** (((self.tau_k - self.inner_iter)*0.2)+2))
-            self.theta = self.theta - self.step_size('eta') * lr * grd *rate
-            self.pert_theta = np.clip(self.theta + self.delta_k * (self.new_uk+ np.random.normal(0, 0.05, d)) * rate,-1.5,1.5)
+            rate = 0.5
+            lr = (self.forgetting_factor ** (((self.tau_k - self.inner_iter))))
+            self.theta = self.theta - self.step_size('eta') * lr * grd *rate #10 #*100 #* 0.001
+            self.pert_theta = self.theta# np.clip(self.theta + self.delta_k * (self.new_uk)*rate ,-999,999) #+ np.random.normal(0, 0.00001, d)
             self.inner_iter += 1
 
         if self.inner_iter == self.tau_k:
@@ -70,9 +72,21 @@ class DFO_GD:
         
         self.coef_ = self.pert_theta[1:].reshape(-1,1).T
 
-
+    def initialization(self,X_b,y):
+        d = X_b.shape[1]
+        LR = LogisticRegression()
+        LR.fit(X_b, y)
+        init_theta = LR.w.reshape(-1)
+        # init_theta = np.random.rand(d)
+        sample_z = np.zeros((config.batch, d))
+        return init_theta, sample_z
+    
     def ell_loss(self, pert_theta, X,y):
-        return np.linalg.norm(np.dot(X, pert_theta) - y) ** 2
+        epsilon = 1e-15
+        y_pred = self.sigmoid(np.dot(X, pert_theta))
+        y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
+        return np.mean(-y * np.log(y_pred) - (1 - y) * np.log(1 - y_pred))
+        # return np.linalg.norm(self.sigmoid(np.dot(X, pert_theta)) - y) ** 2
 
     def predict(self, X):
         X_b = np.c_[np.ones((X.shape[0], 1)), X]
@@ -93,15 +107,6 @@ class DFO_GD:
         s = np.random.normal(0, 1, d)
         norm = math.sqrt(sum(s * s))
         return s / norm
-
-    def initialization(self,X_b,y):
-        d = X_b.shape[1]
-        LR = LogisticRegression()
-        LR.fit(X_b, y)
-        init_theta = LR.w.reshape(-1)
-        # init_theta = np.random.rand(d)
-        sample_z = np.zeros((config.batch, d))
-        return init_theta, sample_z
     
     def step_size(self, name='delta'):
         if name == 'delta':

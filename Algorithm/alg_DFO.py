@@ -30,7 +30,7 @@ def DFO(X,y,num_iters = 25,d_list = [10,1000,10000],map = 1,strat_features = np.
             print('    Running epsilon =  {}'.format(d))
             model = DFO_GD()
             model.train(X, y)
-            theta = np.copy(model.coef_)
+            theta = np.copy(model.pert_theta)
             
             for t in range(num_iters):
                 # adjust distribution to current theta
@@ -64,7 +64,7 @@ def DFO(X,y,num_iters = 25,d_list = [10,1000,10000],map = 1,strat_features = np.
                 
                 # learn on induced distribution
                 model.train(X_strat, y_strat)
-                theta_new = np.copy(model.theta)
+                theta_new = np.copy(model.pert_theta)
                 if np.linalg.norm(theta_new) == 0:
                     theta_new = theta_new + 1e-5
                 if np.linalg.norm(theta) == 0:

@@ -3,6 +3,7 @@ sys.path.insert(0, sys.path[0]+"/../") # add parent directory to path
 sys.path.insert(0, sys.path[0]+"/../")
 sys.path.insert(0, sys.path[0]+"Algorithm")
 import numpy as np
+import winsound
 import random
 from Algorithm.alg_method_1 import method_1
 from Algorithm.alg_method_2 import method_2
@@ -22,7 +23,7 @@ num_iters = 100
 d_list = [10,20,30,40,50] #,1000,10000 10,100,1000,60,80,100
 num_experiments = 10
 map = 1
-folder_path = 'result_x/'
+folder_path = 'SyntheticDatasets/linear/result_x/'
 
 np.random.seed(seed_value)
 random.seed(seed_value)
@@ -117,3 +118,5 @@ np.savez(file_name_npy, model_gaps_avg = model_gaps_avg, model_gaps_std = model_
 print(f"Data saved to {file_name_npy}")
 
 plot_fig(num_iters,d_list,folder_path)
+
+winsound.Beep(1000, 1000)  # 频率1000Hz，持续时间500ms
