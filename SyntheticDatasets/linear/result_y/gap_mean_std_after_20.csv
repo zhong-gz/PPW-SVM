@@ -6,3 +6,4 @@ RGD Logistic Regression,0.441 $\pm$ 0.049,0.615 $\pm$ 0.034,0.702 $\pm$ 0.033
 RRM with Neural Networks,0.022 $\pm$ 0.02,0.015 $\pm$ 0.026,0.014 $\pm$ 0.031
 Two-Stage Approach,0.422 $\pm$ 0.053,0.576 $\pm$ 0.038,0.658 $\pm$ 0.034
 PerGD,0.445 $\pm$ 0.051,0.612 $\pm$ 0.036,0.692 $\pm$ 0.031
+DFO,0.704 $\pm$ 0.453,0.706 $\pm$ 0.45,0.708 $\pm$ 0.446

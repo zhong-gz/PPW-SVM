@@ -56,19 +56,20 @@ class DFO_GD:
             # new_sample = self.problem.sample_from_stationary_dist(pert_theta)
             self.sample_count += 1
 
-            grd = d / self.delta_k * ((self.ell_loss(self.pert_theta, X_b,Y))) * (self.new_uk ) #+ np.random.normal(0, 0.00001, d)
+            grd = d / self.delta_k * ((self.ell_loss(self.pert_theta, X_b,Y))) * (self.new_uk ) 
             # grd = self.problem.dim / delta_k * self.problem.expect_loss(pert_theta) * uk  #如果用真正的grd是可以收敛的
 
             # update theta
             rate = 0.5
             lr = (self.forgetting_factor ** (((self.tau_k - self.inner_iter))))
-            self.theta = self.theta - self.step_size('eta') * lr * grd *rate #10 #*100 #* 0.001
-            self.pert_theta = self.theta# np.clip(self.theta + self.delta_k * (self.new_uk)*rate ,-999,999) #+ np.random.normal(0, 0.00001, d)
+            self.theta = self.theta - self.step_size('eta') * lr * grd #*0.1 # *rate #10 #*100 #* 0.001
+            self.pert_theta =  self.theta + self.delta_k * (self.new_uk) #* 0.01 #*rate 
             self.inner_iter += 1
 
         if self.inner_iter == self.tau_k:
             self.inner_iter = 0
             self.outer_iter += 1
+            self.pert_theta =  self.theta
         
         self.coef_ = self.pert_theta[1:].reshape(-1,1).T
 
@@ -76,7 +77,7 @@ class DFO_GD:
         d = X_b.shape[1]
         LR = LogisticRegression()
         LR.fit(X_b, y)
-        init_theta = LR.w.reshape(-1)
+        init_theta = LR.w.reshape(-1) + np.random.rand(d) *0.5
         # init_theta = np.random.rand(d)
         sample_z = np.zeros((config.batch, d))
         return init_theta, sample_z

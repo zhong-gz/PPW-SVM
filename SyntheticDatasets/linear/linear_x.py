@@ -119,4 +119,4 @@ print(f"Data saved to {file_name_npy}")
 
 plot_fig(num_iters,d_list,folder_path)
 
-winsound.Beep(1000, 1000)  # 频率1000Hz，持续时间500ms
+# winsound.Beep(1000, 1000)  # 频率1000Hz，持续时间500ms
