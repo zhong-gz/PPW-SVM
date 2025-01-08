@@ -35,7 +35,7 @@ def plot_fig(num_iters = 25,d_list = [10,1000,10000],folder_path = 'result/'):
     linestyles = ['-', '--', '-.', '-', '--', '-.', ':','-', '--', '-.', ':']
 
     for c in range(num_d):
-        fig = plt.figure(figsize=(15,10))
+        fig = plt.figure(figsize=(15,6))
         ax = fig.gca()
         offset = 0.8
         max_element = 0
@@ -53,14 +53,14 @@ def plot_fig(num_iters = 25,d_list = [10,1000,10000],folder_path = 'result/'):
         plt.tick_params(labelsize=18)
         plt.ylim(0.3, 1)
         # plt.ylim(min(0.5,min_element), max_element)
-        plt.legend(loc='lower right', fontsize = 20)
+        plt.legend(loc='lower right', fontsize = 18)
         # plt.title('Accuracy, d={}'.format(d_list[c]), fontsize = 18)
         file_name = f'acc_d = {d_list[c]}.pdf'
         plt.tight_layout()
         plt.savefig(folder_path+file_name, transparent=True, backend='pdf')
     
     for c in range(num_d):
-        fig = plt.figure(figsize=(15,10))
+        fig = plt.figure(figsize=(15,6))
         max_element = 0
         min_element = 100
         for i, methods_name in enumerate(methods):
@@ -75,14 +75,14 @@ def plot_fig(num_iters = 25,d_list = [10,1000,10000],folder_path = 'result/'):
         plt.tick_params(labelsize=18)
         plt.ylim(0.3, 1)
         # plt.ylim(min(0.5,min_element), max_element)
-        plt.legend(loc='lower right', fontsize = 20)
+        plt.legend(loc='lower right')
         # plt.title('Accuracy after data distribution shift, d={}'.format(d_list[c]), fontsize = 18)
         file_name = f'acc_d = {d_list[c]}_start.pdf'
         plt.tight_layout()
         plt.savefig(folder_path+file_name, transparent=True, backend='pdf')
 
     for c in range(num_d):
-        fig = plt.figure(figsize=(15,10))
+        fig = plt.figure(figsize=(15,6))
         max_element = 0
         min_element = 100
         for i, methods_name in enumerate(methods):
@@ -97,14 +97,14 @@ def plot_fig(num_iters = 25,d_list = [10,1000,10000],folder_path = 'result/'):
         plt.tick_params(labelsize=18)
         plt.ylim(0.3, 1)
         # plt.ylim(min(0.5,min_element), max_element)
-        plt.legend(loc='lower right', fontsize = 20)
+        plt.legend(loc='lower right')
         # plt.title('Accuracy after data distribution shift, d={}'.format(d_list[c]), fontsize = 18)
         file_name = f'acc_d = {d_list[c]}_start_no_std.pdf'
         plt.tight_layout()
         plt.savefig(folder_path+file_name, transparent=True, backend='pdf')
 
     for c in range(num_d):
-        fig = plt.figure(figsize=(15,10))
+        fig = plt.figure(figsize=(15,6))
         for i, methods_name in enumerate(methods):
             inner_dict = data_dict[methods_name]
             model_gaps_avg = inner_dict.get('model_gaps_avg')
@@ -113,7 +113,7 @@ def plot_fig(num_iters = 25,d_list = [10,1000,10000],folder_path = 'result/'):
         plt.xlabel('Iteration', fontsize = 18)
         plt.ylabel('Model Consistency', fontsize = 18)
         plt.tick_params(labelsize=18)
-        plt.legend(loc='lower right', fontsize = 20)
+        plt.legend(loc='lower right')
         plt.ylim(-1,1)
         # plt.yscale('log')
         # plt.title('Model Consistency, d={}'.format(d_list[c]), fontsize = 18)
@@ -122,7 +122,7 @@ def plot_fig(num_iters = 25,d_list = [10,1000,10000],folder_path = 'result/'):
         plt.savefig(folder_path+file_name, transparent=True, backend='pdf')
 
     for c in range(num_d):
-        fig = plt.figure(figsize=(15,10))
+        fig = plt.figure(figsize=(15,6))
         for i, methods_name in enumerate(methods):
             inner_dict = data_dict[methods_name]
             model_gaps_avg = inner_dict.get('model_gaps_avg')
@@ -131,7 +131,7 @@ def plot_fig(num_iters = 25,d_list = [10,1000,10000],folder_path = 'result/'):
         plt.xlabel('Iteration', fontsize = 18)
         plt.ylabel('Model Consistency', fontsize = 18)
         plt.tick_params(labelsize=18)
-        plt.legend(loc='lower right', fontsize = 20)
+        plt.legend(loc='lower right')
         plt.ylim(-1,1)
         # plt.yscale('log')
         # plt.title('Model Consistency, d={}'.format(d_list[c]), fontsize = 18)

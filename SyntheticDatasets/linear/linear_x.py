@@ -108,14 +108,14 @@ kerneltype = 'linear'
 #             acc_list_end_avg = acc_list_end_avg, acc_list_end_std = acc_list_end_std)
 # print(f"Data saved to {file_name_npy}")
 
-# DFO
-model_gaps_avg,model_gaps_std,acc_list_start_avg,acc_list_start_std,acc_list_end_avg,acc_list_end_std,method_name = \
-    DFO(X,y,num_iters,d_list,map = map,strat_features = strat_features,num_experiments = num_experiments,seed_value = seed_value)
-file_name_npy = f"{folder_path}{method_name}.npz"
-np.savez(file_name_npy, model_gaps_avg = model_gaps_avg, model_gaps_std = model_gaps_std,\
-            acc_list_start_avg = acc_list_start_avg, acc_list_start_std = acc_list_start_std,\
-            acc_list_end_avg = acc_list_end_avg, acc_list_end_std = acc_list_end_std)
-print(f"Data saved to {file_name_npy}")
+# # DFO
+# model_gaps_avg,model_gaps_std,acc_list_start_avg,acc_list_start_std,acc_list_end_avg,acc_list_end_std,method_name = \
+#     DFO(X,y,num_iters,d_list,map = map,strat_features = strat_features,num_experiments = num_experiments,seed_value = seed_value)
+# file_name_npy = f"{folder_path}{method_name}.npz"
+# np.savez(file_name_npy, model_gaps_avg = model_gaps_avg, model_gaps_std = model_gaps_std,\
+#             acc_list_start_avg = acc_list_start_avg, acc_list_start_std = acc_list_start_std,\
+#             acc_list_end_avg = acc_list_end_avg, acc_list_end_std = acc_list_end_std)
+# print(f"Data saved to {file_name_npy}")
 
 plot_fig(num_iters,d_list,folder_path)
 

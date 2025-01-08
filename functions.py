@@ -301,12 +301,14 @@ def plot_step(i, offset, start_list, end_list, method_name, colors,markers,num_i
         plt.plot([i+offset, i+1], [end_list[c,i], start_list[c,i+1]], 'g:')
 
 def plot_acc(acc_list_start,acc_list_start_std,colors,markers,linestyles,method_name,std=1):
-    plt.plot(range(len(acc_list_start)),acc_list_start,color=colors, marker=markers, linestyle=linestyles,label=method_name, linewidth=1, markersize=6)
+    # plt.plot(range(len(acc_list_start)),acc_list_start,color=colors, marker=markers, linestyle=linestyles,label=method_name, linewidth=1, markersize=6)
+    plt.plot(range(len(acc_list_start)),acc_list_start,color=colors, marker=None, linestyle=linestyles,label=method_name, linewidth=3)
     if std == 1:
         plt.fill_between(range(len(acc_list_start)), acc_list_start - acc_list_start_std, acc_list_start + acc_list_start_std, color= colors, alpha=0.2, linewidth=0)
 
 def plot_model_gap(model_gaps_avg,model_gaps_std,colors,markers,linestyles,method_name,std=1):
-    plt.plot(range(len(model_gaps_avg)),model_gaps_avg,color=colors, marker=markers, linestyle=linestyles,label=method_name, linewidth=1, markersize=6)
+    # plt.plot(range(len(model_gaps_avg)),model_gaps_avg,color=colors, marker=markers, linestyle=linestyles,label=method_name, linewidth=1, markersize=6)
+    plt.plot(range(len(model_gaps_avg)),model_gaps_avg,color=colors, marker=None, linestyle=linestyles,label=method_name, linewidth=3)
     if std == 1:
         plt.fill_between(range(len(model_gaps_avg)), model_gaps_avg - model_gaps_std, model_gaps_avg + model_gaps_std, alpha=0.2,color=colors, linewidth=0)
 
